@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4현 베이스 코드 연습</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 20px;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .note {
+      font-weight: bold;
+      color: blue;
+    }
+    #bass-practice {
+      margin-top: 30px;
+    }
+    #practice-container {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .difficulty-button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .difficulty-button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>4현 베이스 기타 코드 연습</h1>
+
+  <!-- 4현 베이스 코드표 (가로, 세로 바꾼 구조) -->
+  <div>
+    <h3>4현 베이스 코드표</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>프렛</th>
+          <th>0 (개방현)</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+          <th>8</th>
+          <th>9</th>
+          <th>10</th>
+          <th>11</th>
+          <th>12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>G (1현)</td>
+          <td class="note">G</td>
+          <td>G#/Ab</td>
+          <td class="note">A</td>
+          <td class="note">A#/Bb</td>
+          <td class="note">B</td>
+          <td class="note">C</td>
+          <td class="note">C#/Db</td>
+          <td class="note">D</td>
+          <td class="note">D#/Eb</td>
+          <td class="note">E</td>
+          <td class="note">F</td>
+          <td class="note">F#/Gb</td>
+          <td class="note">G</td>
+        </tr>
+        <tr>
+          <td>D (2현)</td>
+          <td class="note">D</td>
+          <td class="note">D#/Eb</td>
+          <td class="note">E</td>
+          <td class="note">F</td>
+          <td class="note">F#/Gb</td>
+          <td class="note">G</td>
+          <td class="note">G#/Ab</td>
+          <td class="note">A</td>
+          <td class="note">A#/Bb</td>
+          <td class="note">B</td>
+          <td class="note">C</td>
+          <td class="note">C#/Db</td>
+          <td class="note">D</td>
+        </tr>
+        <tr>
+          <td>A (3현)</td>
+          <td class="note">A</td>
+          <td class="note">A#/Bb</td>
+          <td class="note">B</td>
+          <td class="note">C</td>
+          <td class="note">C#/Db</td>
+          <td class="note">D</td>
+          <td class="note">D#/Eb</td>
+          <td class="note">E</td>
+          <td class="note">F</td>
+          <td class="note">F#/Gb</td>
+          <td class="note">G</td>
+          <td class="note">G#/Ab</td>
+          <td class="note">A</td>
+        </tr>
+        <tr>
+          <td>E (4현)</td>
+          <td class="note">E</td>
+          <td class="note">F</td>
+          <td class="note">F#/Gb</td>
+          <td class="note">G</td>
+          <td class="note">G#/Ab</td>
+          <td class="note">A</td>
+          <td class="note">A#/Bb</td>
+          <td class="note">B</td>
+          <td class="note">C</td>
+          <td class="note">C#/Db</td>
+          <td class="note">D</td>
+          <td class="note">D#/Eb</td>
+          <td class="note">E</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 난이도 버튼 추가 -->
+  <div id="bass-practice">
+    <h3>베이스 코드 연습</h3>
+    <div>
+      <button class="difficulty-button" onclick="startPractice('easy')">4초</button>
+      <button class="difficulty-button" onclick="startPractice('medium')">2초</button>
+      <button class="difficulty-button" onclick="startPractice('hard')">1초</button>
+      <button class="difficulty-button" onclick="startPractice('half')">0.5초</button>
+    </div>
+    <button onclick="stopPractice()">연습 중단</button>
+    <div id="practice-container"></div>
+  </div>
+
+  <script>
+    const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    const difficultyTimes = { 'easy': 4000, 'medium': 2000, 'hard': 1000, 'half': 500 };
+    let practiceInterval;
+
+    function startPractice(difficulty) {
+      const practiceContainer = document.getElementById('practice-container');
+      practiceContainer.innerHTML = ''; // 초기화
+
+      const timeInterval = difficultyTimes[difficulty] || difficultyTimes['easy'];
+
+      practiceInterval = setInterval(() => {
+        const randomNote = notes[Math.floor(Math.random() * notes.length)];
+        practiceContainer.innerHTML = `<p>${randomNote}</p>`;
+      }, timeInterval);
+    }
+
+    function stopPractice() {
+      clearInterval(practiceInterval);
+      alert('연습이 종료되었습니다!');
+    }
+  </script>
+</body>
+</html>
